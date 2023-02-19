@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "@types/node": "^18.11.9",
+    "canvas": "^2.10.2",
     "fluent-ffmpeg": "^2.1.2",
-    "node-system-fonts": "^1.0.1"
+    "node-system-fonts": "^1.0.1",
+    "ts-semaphore": "^1.0.0"
   }
 }

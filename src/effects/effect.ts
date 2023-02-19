@@ -5,7 +5,11 @@ import { Keyframe } from "./keyframe";
 import { KeyframeManager } from "./keyframemanager";
 
 export abstract class EffectProperties {
-    
+    *[Symbol.iterator](): Iterator<any> {
+        for (let val of Object.values(this)) {
+            yield val;
+        }
+    }
 }
 
 export abstract class Effect<Prop extends EffectProperties> {

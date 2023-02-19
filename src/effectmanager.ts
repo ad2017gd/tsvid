@@ -16,6 +16,7 @@ export class EffectManager {
         if(collection.some(x=>typeof x == typeof effect ))
         effect.manager = this;
         collection.push(effect);
+        return this;
     }
 
     public get<T extends Effect<EffectProperties> = Effect<EffectProperties>>(id : string) : T {

@@ -14,6 +14,7 @@ export class ElementManager {
         let collection = element instanceof VideoElement ? this._video : this._audio;
         element.elementManager = this;
         collection.push(element);
+        return this;
     }
 
     public get<T extends Element = Element>(id : string) : T {

@@ -36,7 +36,7 @@ export abstract class Track {
     public get duration() : ElementTiming {
         let longest = new ElementTimingFrame({frameStart : 0, frameDuration: 0});
         for(let element of this.elementManager.elements) {
-            if((element.timing.frameStart + element.timing.frameDuration) > (longest.frameStart + longest.frameDuration))
+            if(element.timing && (element.timing.frameStart + element.timing.frameDuration) > (longest.frameStart + longest.frameDuration))
                 longest = new ElementTimingFrame(element.timing);
         }
         return ((this._duration.frameStart + this._duration.frameDuration) > (longest.frameStart + longest.frameDuration)) ?

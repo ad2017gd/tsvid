@@ -2,6 +2,10 @@ import { randomBytes } from "crypto";
 import { EffectManager } from "../effectmanager";
 import { ElementManager } from "../elementmanager";
 
+export type Dynamic<T> = T | Function;
+export type Dynamify<T> = {[A in keyof T]?: Dynamic<T[A]>};
+
+
 export abstract class ElementTiming {
     public abstract get frameStart(): number;
     public abstract get frameDuration(): number;
@@ -122,8 +126,8 @@ export abstract class Element {
     public effectManager : EffectManager;
     protected _timing? : ElementTiming;
 
-    public abstract get timing() : ElementTiming;
-    public abstract set timing(timing : ElementTiming);
+    public abstract get timing() : ElementTiming | undefined;
+    public abstract set timing(timing : ElementTiming | undefined);
 
     public get id() { return this._id; };
     constructor(id? : string) {

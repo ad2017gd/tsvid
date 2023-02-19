@@ -1,2 +1,2 @@
 export * from './renderers/renderer';
-export * from './renderers/ffmpeg';
+export * from './renderers/canvas';

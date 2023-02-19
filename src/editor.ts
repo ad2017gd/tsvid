@@ -1,6 +1,9 @@
+import { randomBytes } from "crypto";
 import { ElementTiming, ElementTimingFrame } from "./elements";
-import { Renderer } from "./renderers/renderer";
+import { Renderer, RendererOptions } from "./renderers/renderer";
 import { TrackManager } from "./trackmanager";
+
+
 
 export class Editor {
     public trackManager: TrackManager;
@@ -9,7 +12,11 @@ export class Editor {
     public width : number = 1920;
     public height : number = 1080;
 
+    private _id : string;
+    public get id() { return this._id; };
+
     constructor() {
+        this._id = randomBytes(5).toString('hex');
         this.trackManager = new TrackManager(this);
     }
 
@@ -22,10 +29,7 @@ export class Editor {
         return longest as ElementTiming;
     }
 
-    public render(outfile: string) : void {
-        if(!this.renderer) {
-            throw "No Renderer assigned to Editor.";
-        }
-        this.renderer.render(this, outfile);
+    public createRenderer<T extends Renderer>(type : { new(editor:Editor): T ;}) : Renderer {
+        return this.renderer = new type(this);
     }
 }

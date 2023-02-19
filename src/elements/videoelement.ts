@@ -8,15 +8,17 @@ export abstract class VideoElementProperties {
 }
 
 export abstract class VideoElement extends Element {
-    protected _rectangle : Rectangle;
-    public abstract get rectangle() : Rectangle;
+    protected _rectangle : Rectangle | undefined;
+    public abstract get rectangle() : Rectangle | undefined;
     public abstract properties : VideoElementProperties;
-    public transform : TransformEffect;
+    private _transform : TransformEffect;
+    public get transform() {return this._transform};
+    public set transform(transform : TransformEffect) {transform.manager = this.effectManager; this._transform = transform; }
 
     constructor(rectangle? : Rectangle, id? : string) {
         super(id);
-        this.transform = new TransformEffect();
-        this.transform.manager = this.effectManager;
+        this._transform = new TransformEffect();
+        this._transform.manager = this.effectManager;
         this._rectangle = rectangle ?? new Rectangle(0,0,300,200);
     }
 }

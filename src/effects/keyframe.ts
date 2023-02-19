@@ -10,6 +10,23 @@ export class Keyframe<E extends EffectProperties> {
     public timing! : ElementTiming;
     public properties! : E;
     public manager? : KeyframeManager<E>;
+
+    public get last() : boolean {
+        return this.manager ? (this.manager._keyframes.findIndex(x=>x.id == this.id) == (this.manager._keyframes.length + 1)) : false;
+    }
+    public get first() : boolean {
+        return this.manager ? (this.manager._keyframes.findIndex(x=>x.id == this.id) == 0) : false;
+    }
+    public get next() : Keyframe<E> | null {
+        return (this.manager && !this.last) ? 
+            this.manager._keyframes[this.manager._keyframes.findIndex(x=>x.id == this.id)+1] : 
+            null;
+    }
+    public get previous() : Keyframe<E> | null {
+        return (this.manager && !this.first) ? 
+            this.manager._keyframes[this.manager._keyframes.findIndex(x=>x.id == this.id)-1] : 
+            null;
+    }
     
 
     constructor(type : { new(): E ;}, keyframeProps?: Omit<Partial<Keyframe<E>>, "id" | "_id" | "manager">, id? : string) {

@@ -17,7 +17,7 @@ export class TrackManager {
         this.editor = editor;
     }
 
-    public add(track : Track, placement? : AbsoluteTrackPlacement | RelativeTrackPlacement) : void {
+    public add(track : Track, placement? : AbsoluteTrackPlacement | RelativeTrackPlacement) {
         track.manager = this;
         let collection = track instanceof VideoTrack ? this._video : this._audio;
 
@@ -35,6 +35,7 @@ export class TrackManager {
 
             collection.splice(index, 0, track);
         }
+        return this;
     }
 
     public get<T extends Track = Track>(id : string) : T {

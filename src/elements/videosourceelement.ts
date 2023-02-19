@@ -9,7 +9,6 @@ export class VideoSourceProperties extends VideoElementProperties {
     }
     public set path(val : string) {
         this._path = val;
-
     }
     constructor(properties? : Partial<VideoSourceProperties>) {
         super();
@@ -21,7 +20,7 @@ export class VideoSourceElement extends VideoElement {
     private _sourceVideoTiming : ElementTiming = new ElementTimingFrame({frameDuration:0,frameStart:0});
 
     public properties: VideoSourceProperties = new VideoSourceProperties();
-    public get rectangle(): Rectangle {
+    public get rectangle(): Rectangle | undefined {
         return this._rectangle;
     }
 
